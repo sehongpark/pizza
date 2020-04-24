@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+
+  <div class="container-fluid" layout:fragment="content">
+    <!-- jumbotron -->
+    <div class="jumbotron">
+      <h1>내 장바구니</h1>
+    </div>
+
+    <form method="post" th:action="@{/orders}" th:object="${cart}">
+      <!-- 테이블 -->
+      <table class="table" th:object="${cart}">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>피자명</th>
+            <th>가격</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pizza: *{pizzas}">
+            <td th:text="${pizzaStat.count}">1</td>
+            <td th:text="${pizza.name}">페퍼로니 피자</td>
+            <!-- 문자열 연결 및 금액 콤마 넣기, https://gigas-blog.tistory.com/127 -->
+            <td th:text="|${#numbers.formatInteger(pizza.price, 3, 'COMMA')}원|">9,900원</td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td th:text="|${#numbers.formatInteger(totalPrice, 3, 'COMMA')}원|">0,000원</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="form-group">
+        <label>배달 주소</label>
+        <textarea name="address" class="form-control" rows="3"></textarea>
+      </div>
+      <input type="hidden" name="id" th:value="${cart.id}" />
+
+      <button type="submit" class="btn btn-primary">전송</button>
+    </form>
+
+  </div>
+</html>

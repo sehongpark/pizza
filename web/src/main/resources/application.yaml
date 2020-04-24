@@ -1,0 +1,28 @@
+# http://lannstark.tistory.com/14
+# http://goddaehee.tistory.com/213
+spring:
+  devtools:
+    livereload:
+      enabled: true
+
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/domino"
+    username: postgres
+    password: postgres
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+      hibernate.use_sql_comments: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

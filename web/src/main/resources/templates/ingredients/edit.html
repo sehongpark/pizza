@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+
+  <div layout:fragment="content">
+    <div class="jumbotron">
+      <h1>재료 수정</h1>
+      <hr/>
+    </div>
+
+    <div class="container">
+      <form method="post" th:action="@{/ingredients/{id}(id = ${ingredient.id})}">
+        <!-- name -->
+        <div class="form-group">
+          <label>이름</label>
+          <input name="name" type="text" class="form-control" th:value="${ingredient.name}"/>
+        </div>
+
+        <!-- type -->
+        <div class="form-group">
+          <label>타입</label>
+          <select name="type" class="form-control">
+            <option value="dough" th:selected="${ingredient.type.toString() == 'DOUGH'}">도우</option>
+            <option value="sauce" th:selected="${ingredient.type.toString() == 'SAUCE'}">소스</option>
+            <option value="cheese" th:selected="${ingredient.type.toString() == 'CHEESE'}">치즈</option>
+            <option value="topping" th:selected="${ingredient.type.toString() == 'TOPPING'}">토핑</option>
+          </select>
+          <p th:text="${ingredient.type}"></p>
+        </div>
+
+        <!-- submit -->
+        <button type="submit" class="btn btn-primary">전송</button>
+      </form>
+    </div>
+
+  </div>
+</html>

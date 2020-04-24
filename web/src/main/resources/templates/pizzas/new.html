@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+
+  <div layout:fragment="content">
+    <div class="jumbotron">
+      <h1>피자 등록</h1>
+      <hr/>
+    </div>
+
+    <div class="container">
+      <form method="post" action="/pizzas">
+        <!-- name -->
+        <div class="form-group">
+          <label>피자명</label>
+          <input name="name" class="form-control" type="text" placeholder="피자명을 입력하세요."/>
+        </div>
+
+        <!-- price -->
+        <div class="form-group">
+          <label>가격</label>
+          <input name="price" class="form-control" type="number" placeholder="가격을 입력하세요."/>
+        </div>
+
+        <!-- ingredients -->
+        <div class="form-group">
+          <label>재료</label>
+          <div class="form-check" th:each="item: ${ingredients}">
+            <input class="form-check-input" type="checkbox" name="ingredientIds" th:value="${item.id}"/>
+            <label class="form-check-label" th:text="${item.name}">TYPE_NAME</label>
+          </div>
+        </div>
+
+        <!-- submit -->
+        <button class="btn btn-primary" type="submit">제출</button>
+      </form>
+    </div>
+
+  </div>
+</html>

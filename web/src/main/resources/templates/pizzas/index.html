@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default"
+      xmlns:sec="http://www.w3.org/1999/xhtml"> <!-- 시큐리티 태그 추가 -->
+
+  <div layout:fragment="content">
+    <div class="jumbotron">
+      <h1>피자 목록</h1>
+      <hr/>
+      <a class="btn btn-primary" th:href="@{/pizzas/new}">피자 추가</a>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>이름</th>
+          <th>가격</th>
+          <th>재료</th>
+          <th></th>
+          <!-- 관리자 전용 -->
+          <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- foreach -->
+        <tr th:each="item: ${pizzas}">
+          <td th:text="${item.id}">#</td>
+          <td>
+            <a th:href="@{/pizzas/{id}(id = ${item.id})}" th:text="${item.name}"></a>
+          </td>
+          <td th:text="${item.price}">가격</td>
+          <td>
+            <span th:each="i: ${item.ingredients}" th:text="|${i.name}, |"> </span>
+          </td>
+          <td>
+            <!-- 해당 피자, 장바구니에 담기 -->
+            <a th:href="@{/carts/{id}(id = ${item.id})}" class="btn btn-primary">장바구니 담기</a>
+          </td>
+
+          <!-- 관리자 전용 -->
+          <td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-info" th:href="@{/pizzas/edit/{id}(id = ${item.id})}">수정</a>
+            <a class="btn btn-danger" th:href="@{/pizzas/delete/{id}(id = ${item.id})}">삭제</a>
+          </td>
+
+          <!-- 일반  -->
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</html>
