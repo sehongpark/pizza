@@ -1,0 +1,26 @@
+# 언어 설정
+language: java
+jdk:
+  - openjdk8
+
+# 해당 브랜치가 푸시 되면 CI 수행
+branches:
+  only:
+    - master
+
+# Travis CI 서버의 Home
+# 배포를 위한 라이브러리들을 캐싱(저장)
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+# master 브랜치 푸시 경우,
+# 수행 될 스크립트
+script: "./gradlew clean build"
+
+# CI 실행 완료시 메일 알림
+notifications:
+  email:
+    recipients:
+      - sehongpark@cloudstudying.kr
