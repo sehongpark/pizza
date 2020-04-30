@@ -1,13 +1,14 @@
 # http://lannstark.tistory.com/14
 # http://goddaehee.tistory.com/213
 spring:
+  profiles:
   devtools:
     livereload:
       enabled: true
 
   datasource:
-    url: "jdbc:postgresql://localhost:5432/domino"
-    username: postgres
+    url: "jdbc:postgresql://postgres-11.ca6yp9qqygdd.ap-northeast-2.rds.amazonaws.com:5432/domino"
+    username: shpark86 # local: postgres, rds: shpark86
     password: postgres
 
   jpa:
