@@ -7,9 +7,14 @@ spring:
       enabled: true
 
   datasource:
+    # url 주소, RDS의 엔드포인트와 일치해야 함! 데이터베이스 명이 없으면 접속 안되니 접속 배포 전 데이터 베이스도 만들 것!
     url: "jdbc:postgresql://postgres-11.ca6yp9qqygdd.ap-northeast-2.rds.amazonaws.com:5432/domino"
+
+    # RDS의 DB 사용자 명과 일치해야 함! local과 혼동 하면 안됨!
     username: shpark86 # local: postgres, rds: shpark86
-    password: Qoalffl12#
+
+    # 비밀번호도 username과 마찬가지! 추후 profile로 개발 컴과, 실서버에서 각각 다르게 적용할 수 있음!
+    password: Qoalffl12# # local: postgres, RDS: Qoalffl12#
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
